@@ -29,8 +29,8 @@ app.use(
 
 // routes
 app.use("/api/auth", authRoute);
-app.use("/api/user", userRoute);
-app.use("/api/message", messageRoute);
+app.use("/api/users", userRoute);
+app.use("/api/messages", messageRoute);
 app.use(errorHandler);
 
 // server

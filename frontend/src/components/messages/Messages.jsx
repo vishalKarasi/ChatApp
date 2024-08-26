@@ -1,26 +1,34 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import Message from "./Message";
+import useGetMessage from "@hooks/useGetMessage";
+import MessageSkeleton from "@components/skeletons/MessageSkeleton";
 
 const Messages = () => {
+  const { loading, messages } = useGetMessage();
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (!loading) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, loading]);
+
   return (
     <section className="p-4 flex-1 overflow-auto">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
+      {loading ? (
+        <MessageSkeleton />
+      ) : messages.length === 0 ? (
+        <div className="flex justify-center items-center h-full text-2xl text-red-500">
+          No Messages
+        </div>
+      ) : (
+        <>
+          {messages.map((message) => (
+            <Message key={message._id} message={message} />
+          ))}
+          <div ref={messagesEndRef} />
+        </>
+      )}
     </section>
   );
 };
