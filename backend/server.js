@@ -4,9 +4,9 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { app, server } from "./socket/socket.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
-const app = express();
 dotenv.config();
 
 // import routes
@@ -38,7 +38,7 @@ mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGO_DB_URI)
   .then(() => {
-    app.listen(process.env.PORT, () =>
+    server.listen(process.env.PORT, () =>
       console.log(`Server runing on Port: ${process.env.PORT}`)
     );
   })
