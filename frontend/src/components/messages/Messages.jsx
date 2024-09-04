@@ -20,7 +20,7 @@ const Messages = () => {
     <section className="p-4 flex-1 overflow-auto">
       {loading ? (
         <MessageSkeleton />
-      ) : messages.length === 0 ? (
+      ) : !messages || messages.length === 0 ? (
         <div className="flex justify-center items-center h-full text-2xl text-red-500">
           No Messages
         </div>

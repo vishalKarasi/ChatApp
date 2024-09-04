@@ -7,10 +7,10 @@ const Conversations = () => {
   const { loading, conversations } = useGetConversations();
 
   return (
-    <section className=" py-2 flex flex-col flex-1 overflow-auto">
+    <section className="py-2 flex flex-col flex-1 overflow-auto">
       {loading ? (
         <ConversationSkeleton />
-      ) : !conversations ? (
+      ) : !conversations || conversations.length === 0 ? (
         <div className="flex justify-center items-center h-full text-2xl text-red-500">
           No Friends
         </div>
